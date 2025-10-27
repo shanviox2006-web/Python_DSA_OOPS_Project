@@ -1,0 +1,60 @@
+class student:
+    def __init__(self,name,Class, percentage):
+        self.__name=name
+        self.__Class=Class
+        self.__percentage=percentage 
+    def show(self):
+        print("name:",self.__name,"Class:",self.__Class)
+    def get_percentage(self):
+        return self.__percentage
+    def set_percentage(self,new_percentage):
+        if 0<=new_percentage<=100:
+            self.__percentage=new_percentage
+            print(f"percentage secured at 12th standard by {self.__name} is {new_percentage}%!")
+        else:
+            print("invalid value!")
+            
+def main():
+    stu=[]
+    n=int(input("enter number of students in 10th class:"))
+    for i in range(n):
+        stu_name=input("name: ")
+        stu_class=input("class: ")
+        stu_percentage=eval(input("percentage: "))
+        stu_obj=student(stu_name,stu_class,stu_percentage)
+        stu.append(stu_obj)
+    return stu
+def topper(stu):
+     if not stu: 
+         print("Result to be loaded!")
+         return
+         
+     curr_topper = stu[0]
+     max_perc = curr_topper.get_percentage()
+     
+     for obj in stu:
+        curr_perc = obj.get_percentage()
+        if curr_perc > max_perc:
+            max_perc = curr_perc
+            curr_topper = obj
+            
+     print("\n=== SCHOOL TOPPER REPORT ===")
+     curr_topper.show() 
+     print(f"Securing the highest percentage of {max_perc}%!") 
+
+def rank(stu):
+    rank_stu=sorted(stu,key=lambda student:student.get_percentage(),reverse=True)
+    for i,obj in enumerate(rank_stu):
+        Rank=i+1
+        print(f"Rank{Rank}: ",end="")
+        obj.show()
+        print(f"Percentage:{obj.get_percentage()}%")
+                
+
+if __name__=="__main__":
+    stu=main()
+    
+    topper(stu)
+    rank(stu)
+    
+    
